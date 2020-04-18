@@ -86,42 +86,66 @@ var confirmUpperCase;
 var confirmNumericChar;
 
 // Prompt to determine how many characters the password will contain
-generateBtn.addEventListener("click", promptMe);
-function promptMe() {
-  var userAdjective = prompt(
-    "How many characters would you like your password to contain?"
-  );
-  alert(userAdjective);
-}
-// Loop only if answer is outside the parameters
-if (confirmLength <= 7 || confirmLength >= 129) {
-  alert("Password length must be between 8-128 characters Try again");
+
+function generatePassword() {
   var confirmLength = prompt(
     "How many characters would you like your password to contain?"
   );
+
+  // Loop only if answer is outside the restrictions
+  while (confirmLength <= 7 || confirmLength >= 129) {
+    alert("Password length must be between 8-128 characters try again");
+    var confirmLength = prompt(
+      "How many characters would you like your password to contain?"
+    );
+  }
+  // Confirm the amount of characters the password will contain
+  alert(`Your password will contain ${confirmLength} characters`);
+
+  if (confirmLength >= 8 || confirmLength <= 128) {
+    // Confirm password restrictions
+    var confirmSpecialChar = confirm(
+      "Click OK to confirm if you would like your password to contain special characters"
+    );
+    var confirmLowerCase = confirm(
+      "Click OK to confirm if you would like your password to contain lower case characters"
+    );
+    var confirmUpperCase = confirm(
+      "Click OK to confirm if you would like your password to contain upper case characters"
+    );
+
+    var confirmNumericChar = confirm(
+      "Click OK to confirm if you would like your password to contain numeric characters"
+    );
+  }
+  // Loop only if answer is outside restrictions
+
+  while (
+    (confirmSpecialChar === false) &
+    (confirmLowerCase === false) &
+    (confirmUpperCase === false) &
+    (confirmNumericChar === false)
+  ) {
+    alert("You must choose at least one character type");
+
+    var confirmSpecialChar = confirm(
+      "Click OK to confirm if you would like your password to contain special characters"
+    );
+    var confirmLowerCase = confirm(
+      "Click OK to confirm if you would like your password to contain lower case characters"
+    );
+    var confirmUpperCase = confirm(
+      "Click OK to confirm if you would like your password to contain upper case characters"
+    );
+
+    var confirmNumericChar = confirm(
+      "Click OK to confirm if you would like your password to contain numeric characters"
+    );
+  }
 }
-// Confirm the amount of characters the password will contain
-alert(`Your password will contain ${confirmLength} characters`);
-
-// Confirm password restrictions
-var confirmSpecialChar = confirm(
-  "Click OK to confirm if you would like your password to contain special characters"
-);
-var confirmLowerCase = confirm(
-  "Click OK to confirm if you would like your password to contain lower case characters"
-);
-var confirmUpperCase = confirm(
-  "Click OK to confirm if you would like your password to contain upper case characters"
-);
-
-var confirmNumericChar = confirm(
-  "Click OK to confirm if you would like your password to contain numeric characters"
-);
-
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
 }
