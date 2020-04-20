@@ -102,8 +102,8 @@ function generatePassword() {
   // Confirm the amount of characters the password will contain
   alert(`Your password will contain ${confirmLength} characters`);
 
+  // Confirm password restrictions
   if (confirmLength >= 8 || confirmLength <= 128) {
-    // Confirm password restrictions
     var confirmSpecialChar = confirm(
       "Click OK to confirm if you would like your password to contain special characters"
     );
@@ -142,7 +142,40 @@ function generatePassword() {
       "Click OK to confirm if you would like your password to contain numeric characters"
     );
   }
+
+  //Actions for password restrictions
+  var passwordChar = [];
+
+  if (confirmSpecialChar) {
+    passwordChar = passwordChar.concat(specialChar);
+  }
+
+  if (confirmLowerCase) {
+    passwordChar = passwordChar.concat(alphaLower);
+  }
+
+  if (confirmUpperCase) {
+    passwordChar = passwordChar.concat(alphaUpper);
+  }
+
+  if (confirmNumericChar) {
+    passwordChar = passwordChar.concat(number);
+  }
+  console.log(passwordChar);
+
+  // Generate password in card
+  function yourPwd(length) {
+    var yourPwd = "";
+
+    for (var i = 0; i < confirmLength; i++) {
+      var i = Math.floor(Math.random() * passwordChar.length);
+      yourPwd = passwordChar.charAt(i);
+    }
+    return yourPwd;
+  }
+  console.log(yourPwd);
 }
+
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
