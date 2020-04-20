@@ -1,10 +1,14 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+// Write password to the #password input
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+  passwordText.value = password;
+}
 
-// Multiple Arrays
+// Multiple Variable Arrays
 var specialChar = [
   "!",
   "%",
@@ -20,7 +24,7 @@ var specialChar = [
   "?",
   "~",
 ];
-var alphaLower = [
+var lowerCase = [
   "a",
   "b",
   "c",
@@ -48,7 +52,7 @@ var alphaLower = [
   "y",
   "z",
 ];
-var alphaUpper = [
+var upperCase = [
   "A",
   "B",
   "C",
@@ -89,21 +93,18 @@ var confirmNumericChar;
 
 function generatePassword() {
   var confirmLength = prompt(
-    "How many characters would you like your password to contain?"
+    "How many characters would you like your password to contain? 8-128 characters"
   );
 
-  // Loop only if answer is outside the restrictions
-  while (confirmLength <= 7 || confirmLength >= 129) {
+  // Only if answer is outside the restrictions
+  if (confirmLength <= 7 || confirmLength >= 129) {
     alert("Password length must be between 8-128 characters try again");
-    var confirmLength = prompt(
-      "How many characters would you like your password to contain?"
-    );
+    return;
   }
-  // Confirm the amount of characters the password will contain
-  alert(`Your password will contain ${confirmLength} characters`);
 
   // Confirm password restrictions
-  if (confirmLength >= 8 || confirmLength <= 128) {
+  else {
+    confirmLength >= 8 || confirmLength <= 128;
     var confirmSpecialChar = confirm(
       "Click OK to confirm if you would like your password to contain special characters"
     );
@@ -118,67 +119,37 @@ function generatePassword() {
       "Click OK to confirm if you would like your password to contain numeric characters"
     );
   }
-  // Loop only if answer is outside restrictions
+  // Only if answer is outside restrictions
 
-  while (
+  if (
     (confirmSpecialChar === false) &
     (confirmLowerCase === false) &
     (confirmUpperCase === false) &
     (confirmNumericChar === false)
   ) {
-    alert("You must choose at least one character type");
+    alert("You must choose at least one character type, please try again");
+  } else {
+    //Actions for password restrictions
+    var passwordChar = [];
 
-    var confirmSpecialChar = confirm(
-      "Click OK to confirm if you would like your password to contain special characters"
-    );
-    var confirmLowerCase = confirm(
-      "Click OK to confirm if you would like your password to contain lower case characters"
-    );
-    var confirmUpperCase = confirm(
-      "Click OK to confirm if you would like your password to contain upper case characters"
-    );
+    if (confirmSpecialChar) passwordChar = passwordChar.concat(specialChar);
 
-    var confirmNumericChar = confirm(
-      "Click OK to confirm if you would like your password to contain numeric characters"
-    );
-  }
+    if (confirmLowerCase) passwordChar = passwordChar.concat(lowerCase);
 
-  //Actions for password restrictions
-  var passwordChar = [];
+    if (confirmUpperCase) passwordChar = passwordChar.concat(upperCase);
 
-  if (confirmSpecialChar) {
-    passwordChar = passwordChar.concat(specialChar);
-  }
+    if (confirmNumericChar) passwordChar = passwordChar.concat(number);
 
-  if (confirmLowerCase) {
-    passwordChar = passwordChar.concat(alphaLower);
-  }
-
-  if (confirmUpperCase) {
-    passwordChar = passwordChar.concat(alphaUpper);
-  }
-
-  if (confirmNumericChar) {
-    passwordChar = passwordChar.concat(number);
-  }
-  console.log(passwordChar);
-
-  // Generate password in card
-  function yourPwd(length) {
-    var yourPwd = "";
-
-    for (var i = 0; i < confirmLength; i++) {
-      var i = Math.floor(Math.random() * passwordChar.length);
-      yourPwd = passwordChar.charAt(i);
+    // Generate password inside card
+    var password = "";
+    for (var i = 1; i <= confirmLength; i++) {
+      var randomChar =
+        passwordChar[Math.floor(Math.random() * passwordChar.length)];
+      password = password + randomChar;
     }
-    return yourPwd;
+    return password;
   }
-  console.log(yourPwd);
 }
 
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-  passwordText.value = password;
-}
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
