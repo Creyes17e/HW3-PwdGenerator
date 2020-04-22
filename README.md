@@ -6,4 +6,4 @@ Description: Created a password generator using restrictions such as password le
 
 Installation: Created a repo in github with a README.md. Through gitbash I cloned the repo I pulled and pushed the origin master to add pages and folders in github. I added and committed meaningful changes and updated the html, css, and js code.
 
-Credits: Google Fu, Tutorialspoint, W3Schools, My Bootcamp Instructor and TAs
+Credits: Google Fu, Tutorialspoint, W3Schools, My Bootcamp Instructor and TAs.
