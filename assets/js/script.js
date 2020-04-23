@@ -96,7 +96,7 @@ function generatePassword() {
     "How many characters would you like your password to contain? 8-128 characters"
   );
 
-  // Only if answer is outside the restrictions
+  // Only if length answer is outside the restrictions
   if (confirmLength <= 7 || confirmLength >= 129) {
     alert("Password length must be between 8-128 characters try again");
     return;
@@ -119,7 +119,7 @@ function generatePassword() {
       "Click OK to confirm if you would like your password to contain numeric characters"
     );
   }
-  // Only if answer is outside restrictions
+  // Only if password character answers are outside restrictions
 
   if (
     (confirmSpecialChar,
