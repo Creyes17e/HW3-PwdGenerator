@@ -122,10 +122,10 @@ function generatePassword() {
   // Only if answer is outside restrictions
 
   if (
-    (confirmSpecialChar === false) &
-    (confirmLowerCase === false) &
-    (confirmUpperCase === false) &
-    (confirmNumericChar === false)
+    (confirmSpecialChar,
+    confirmLowerCase,
+    confirmUpperCase,
+    confirmNumericChar === false)
   ) {
     alert("You must choose at least one character type, please try again");
   } else {
